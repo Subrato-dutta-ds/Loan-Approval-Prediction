@@ -78,4 +78,9 @@ Chosen for its ability to handle non-linear relationships and provide feature im
 
 ---
 
-
+streamlit
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
