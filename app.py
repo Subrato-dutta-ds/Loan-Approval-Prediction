@@ -189,8 +189,11 @@ def train_model(df):
     df_clean['Self_Employed'].fillna('No', inplace=True)
     df_clean['Gender'].fillna(df_clean['Gender'].mode()[0], inplace=True)
     df_clean['Married'].fillna(df_clean['Married'].mode()[0], inplace=True)
-    df_clean['Dependents'].fillna('0', inplace=True)
-    df_clean['Dependents'] = df_clean['Dependents'].replace('3+', 3).astype(int)
+# Convert Dependents: replace '3+' with '3', then coerce to numeric, fill NaN with 0, and convert to int
+    df_clean['Dependents'] = pd.to_numeric(
+    df_clean['Dependents'].replace('3+', '3'),
+    errors='coerce'
+).fillna(0).astype(int)
     
     df_clean['Total_Income'] = df_clean['ApplicantIncome'] + df_clean['CoapplicantIncome']
     df_clean['EMI'] = df_clean['LoanAmount'] / df_clean['Loan_Amount_Term']
